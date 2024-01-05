@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+/* styles.css */
+
+/* Reset some default browser styles */
+body, h1, h2, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Apply some styles to make the navbar visually appealing */
+  header {
+    background-color: #333; /* Dark background color */
+    padding: 10px; /* Add padding to the header */
+  }
+  
+  nav {
+    display: flex; /* Use flexbox to arrange navigation items */
+  }
+  
+  nav a {
+    color: white; /* Text color for navigation links */
+    text-decoration: none; /* Remove underline from links */
+    padding: 10px; /* Add padding to each link */
+    margin-right: 10px; /* Add margin between links */
+    font-weight: bold; /* Make the text bold */
+    transition: color 0.3s; /* Smooth color transition on hover */
+  }
+  
+  nav a:hover {
+    color: #ffcc00; /* Change text color on hover */
+  }
+  
