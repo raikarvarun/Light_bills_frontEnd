@@ -8,7 +8,7 @@ const Nav = function (){
         <div>
             <ul className={styles.navul}>
                 
-                <li><Link href="/">Home</Link></li>
+                <li><Link href="/home">Home</Link></li>
                 <li><Link href="/signup">SIGN UP</Link></li>
                 <li><Link href="/login">LOGIN</Link></li>
                  

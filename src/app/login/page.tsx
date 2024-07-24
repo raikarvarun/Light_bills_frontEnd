@@ -1,19 +1,20 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import { redirect } from 'next/navigation'
 import styles from './login.module.css'
-
+import { useRouter } from 'next/navigation'
 
 const Login = ()=> {
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState(""); 
     const [msg , setMsg] = useState("");
+    const router = useRouter()
     useEffect(()=>{
         const auth = localStorage.getItem('user');
-        if(auth) {redirect('/')} ;
+        if(auth) {router.push('/')} ;
     }
     );
-  
+    
+    
 
     return(
         <div className={styles.login}>
