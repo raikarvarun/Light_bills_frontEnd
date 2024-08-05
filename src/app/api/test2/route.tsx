@@ -1,61 +1,17 @@
-// import the Request and Response classes
 
-import { NextResponse, NextRequest } from 'next/server'
-
-// import mysql2/promise for mysql connectivity
-
-import mysql from 'mysql2/promise'
-
-// import GetDBSettings to retrieve the database connection environment parameters,
-
-// and the IDBSettings object interface
-
-
-// 1. populate the connection parameters
-
-let connectionParams = {
-    host: process.env.DATABASE_HOST,
-    database: process.env.DATABASE_NAME,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    port:3306
-  }
-
-// define and export the GET handler function
+import { NextResponse } from 'next/server'
+import { excuteQuery } from '@/lib/db';
 
 export async function GET(request: Request) {
   try {
-    // 2. connect to database
 
-    const connection = await mysql.createConnection(connectionParams)
-
-    // 3. create a query to fetch data
-
-    let get_exp_query = ''
-
-    get_exp_query = 'SELECT * FROM admintable'
-
-    // we can use this array to pass parameters to the SQL query
-
-    let values: any[] = []
-
-    // 4. exec the query and retrieve the results
-
-    const [results] = await connection.execute(get_exp_query, values)
-
-    // 5. close the connection when done
-
-    connection.end()
-
-    // return the results as a JSON API response
-
+    let results = await excuteQuery("select * from admintable",[]);
     return NextResponse.json(results)
-  } catch (err) {
-    console.log('ERROR: API - ', (err as Error).message)
 
+  } catch (err) {
+    
     const response = {
       error: (err as Error).message,
-
       returnedStatus: 200,
     }
 
