@@ -1,7 +1,8 @@
 
 import { NextResponse } from 'next/server';
 import { excuteQuery } from '@/lib/db';
-import { CreateJWT } from '@/lib/help'; 
+import { CreateJWT } from '@/lib/middleware/jwtHepler'; 
+import { createResponse } from '@/lib/global';
 
 export async function POST(request: Request , response :Response) {
   try {
@@ -13,12 +14,13 @@ export async function POST(request: Request , response :Response) {
 		console.log("Length of result is 0 ");
 	}
 	else{
-    let token = CreateJWT({adminID:1 , isAdmin:1 });
-    console.log(token);
-		return NextResponse.json({token:token,login:true})
+    let token = await CreateJWT({adminID:results[0].adminID});
+    const ans = await createResponse(200 , "" , token , {login:true} )
+		return NextResponse.json(ans)
 			
 	}
-	return NextResponse.json({login:false})
+  const ans = await createResponse(200 , "" , "" , {login:false} )
+	return NextResponse.json(ans)
 	
 
   } catch (err) {

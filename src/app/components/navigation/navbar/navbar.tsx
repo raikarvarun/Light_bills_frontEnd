@@ -2,8 +2,8 @@ import  React  from "react";
 import Link from 'next/link'
 import styles from './navbar.module.css'
 import { cookies } from "next/headers";
-import {logout} from '@/lib/help'
 import { redirect } from "next/navigation";
+import { logout } from "@/lib/actions/logoutActiions";
 
 const Nav = function (){
     const session = cookies().get('session')?.value;
@@ -15,12 +15,21 @@ const Nav = function (){
                 
                 
                 
-                {session && ( <li><form
-                                    action={async () => {
-                                            "use server";
-                                                await logout();
-                                                redirect('/');
-                                            }} ><button type="submit">LOGOUT</button> </form></li>)}
+                {session && ( 
+                    <> 
+                    <li><Link href="/dashboard">Dashboard</Link></li>
+                    <li><Link href="/addconsumer">Add</Link></li>
+                    <li><Link href="/showconsumer">ShowConsumer</Link></li>
+                    <li><form
+                            action={async () => {
+                                "use server";
+                                    await logout();
+                                    redirect('/');
+                                }} >
+                            <button type="submit">LOGOUT</button> 
+                        </form>
+                    </li>
+                    </>)}
                 {!session && ( 
                     <>
                         <li><Link href="/signup">SIGN UP</Link></li>

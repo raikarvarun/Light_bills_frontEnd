@@ -1,8 +1,6 @@
-
-import React, { useEffect, useState } from "react";
+import { LoginButtonClicked } from '@/lib/actions/loginActions'
 import styles from './login.module.css'
 import { redirect } from 'next/navigation'
-import { loginButtonClicked } from "@/lib/help";
 
 const Login = ()=> {
         
@@ -12,8 +10,8 @@ const Login = ()=> {
             <h1>LOGIN</h1>
 			<form action={async (formData) =>{
 				'use server'
-				await loginButtonClicked(formData);
-				
+				await LoginButtonClicked(formData);
+				redirect('/')
 			} }>
 				<div>
 					<label>Name</label>
